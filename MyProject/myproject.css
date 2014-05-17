@@ -1,0 +1,380 @@
+.collapsible-backlogs .backlog {
+    height: 30px;
+}
+.collapsible-backlogs .backlog .stories {
+    display: none;
+}
+.collapsible-backlogs .backlog.expanded {
+    height: auto;
+}
+.collapsible-backlogs .backlog.expanded .stories {
+    display: block;
+}
+.collapsible-backlogs #rb .backlog .header .name {
+    position: relative;
+}
+.collapsible-backlogs #rb .backlog .header .items {
+    position: absolute;
+    right: 0;
+    text-align: right;
+    overflow: hidden;
+    box-shadow: -20px 0 10px #eee;
+}
+.collapsible-backlogs #rb .backlog .header .items li {
+    display: inline-block;
+    font-size: 10px;
+    background-color: #eee;
+}
+.collapsible-backlogs #rb .backlog .header .items li a {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.collapsible-backlogs #rb .backlog .header .items li a.show_burndown_chart,
+.collapsible-backlogs #rb .backlog .header .items li a[href*="wiki"] {
+    display: none;
+}
+
+
+/* Hide implemented stories */
+.hide-implemented-stories #taskboard [class^=story_].implemented,
+/* Hide closed tories */
+.hide-closed-stories #taskboard [class^=story_].closed,
+/* Hide closed tasks */
+.hide-closed-tasks #taskboard .task.closed,
+.hide-closed-tasks #taskboard .impediment.closed {
+    display: none !important;
+}
+
+/* Hide impediments */
+.hide-impediments table#impediments { display: none !important; }
+
+/* Restrict "Story" column to one issue per row */
+.narrow-story #taskboard .board td:first-child {
+    max-width: 115px !important;
+    width: 115px !important;
+    min-width: 115px !important;
+}
+.narrow-story #taskboard .story, #rb .label_sprint_impediments {
+    max-width: 95px !important;
+    width: 95px !important;
+}
+.narrow-story #taskboard .story .story-bar {
+    max-width: 92px !important;
+    width: 92px !important;
+}
+.narrow-story #taskboard .story .subject {
+    max-width: 91px !important;
+    width: 91px !important;
+}
+.narrow-story #taskboard #board_header td:first-child {
+    max-width: 136px !important;
+    width: 136px !important;
+    min-width: 136px !important;
+}
+
+/* Restrict "On Hold" column to one issue per row */
+.narrow-on-hold #taskboard table:not(#board_header) .swimlane:nth-child(5),
+.narrow-on-hold #taskboard #board_header .swimlane:nth-child(4),
+/* Restrict "Rejected" column to one issue per row */
+.narrow-rejected #taskboard table:not(#board_header) .swimlane:nth-child(7),
+.narrow-rejected #taskboard #board_header .swimlane:nth-child(6),
+/* Restrict "Closed" column  to one issue per row */
+.narrow-closed #taskboard table:not(#board_header) .swimlane:nth-child(8),
+.narrow-closed #taskboard #board_header .swimlane:nth-child(7) {
+    max-width: 105px !important;
+    width: 105px !important;
+    min-width: 105px !important;
+}
+
+/* Restrict "In Progress" column to one issue per row */
+.narrow-in-progress #taskboard table:not(#board_header) .swimlane:nth-child(4),
+.narrow-in-progress #taskboard #board_header .swimlane:nth-child(3) {
+    max-width: 315px !important;
+    width: 315px !important;
+    min-width: 315px !important;
+}
+.narrow-in-progress #rb .board .add_new {
+    min-width: 16px !important;
+    width: 16px !important;
+}
+.narrow-in-progress #taskboard #board_header td:first-child {
+    max-width: 122px !important;
+    width: 122px !important;
+    min-width: 122px !important;
+}
+
+/* Review reminders */
+.show-review-reminder #taskboard .swimlane[id$=_3] .task .assigned_to_id .t:after {
+    color: red !important;
+    font-weight: bold;
+    display: block;
+    content: 'REVIEW ME!';
+    height: 12px;
+}
+
+/* Wide table */
+.wide-table #taskboard table {
+    table-layout: fixed;
+    width: 100% !important;
+}
+
+/* Readable issues */
+.readable-issues #taskboard .issue,
+.readable-issues #taskboard .story {
+  color: black !important;
+  outline: 1px solid rgba(0, 0, 0, .3)  !important;
+}
+.readable-issues #taskboard .issue .id,
+.readable-issues #taskboard .story .story-bar {
+	opacity: 1 !important;
+    background: rgba(255, 255, 255, .8) !important;
+}
+.readable-issues #taskboard .issue .id a,
+.readable-issues #taskboard .story .story-bar a {
+    color: black !important;
+}
+.readable-issues #taskboard .story .story-bar .status {
+    margin: 2px 0 -2px 2px;
+}
+.readable-issues #taskboard .issue div.subject,
+.readable-issues #taskboard .story div.subject {
+    background: rgba(255, 255, 255, .99) !important;
+}
+.readable-issues #taskboard .issue div.assigned_to_id,
+.readable-issues #taskboard .story div.assigned_to_id {
+    margin-top: 0px;
+    background: rgba(255, 255, 255, .8) !important;
+}
+
+.readable-issues #taskboard .issue div.assigned_to_id .t,
+.readable-issues #taskboard .story div.assigned_to_id .t {
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+}
+
+/* Clone header */
+.clone-header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+
+.sb-settings-menu {
+    background-color: #eeeeee;
+    display: block;
+    margin: 0 0 10px 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+.sb-quicklinks {
+    background-color: #E9E9E9;
+    padding: 10px;
+}
+
+.sb-quicklinks + .sb-quicklinks {
+    padding-top: 0
+}
+
+.sb-quicklinks a {
+    display: block;
+    padding: 0 0 0 20px;
+}
+
+.sb-quicklinks a:hover,
+.sb-quicklinks a.selected {
+    color: #fff !important;
+    background-color: #E20074;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px
+}
+
+.contextMenuPlugin {
+  -webkit-user-select: none;
+  display: none;
+  font-family: tahoma, arial, sans-serif;
+  font-size: 11px;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  min-width: 100px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f3f7;
+  border: 2px solid #f7f7f7;
+  outline: 1px solid #949694;
+}
+
+.contextMenuPlugin > li {
+  margin: 0 0 0 0;
+  padding: 1px;
+  background-repeat: no-repeat;
+}
+
+.contextMenuPlugin > li > a {
+  position: relative;
+  display: block;
+  padding: 3px 3px 3px 28px;
+  color: ButtonText;
+  text-decoration: none;
+  margin: 1px;
+}
+
+.contextMenuPlugin > li > a img {
+  position: absolute;
+  left: 3px;
+  margin-top: -2px;
+  width: 16px;
+  height: 16px;
+}
+.contextMenuPlugin > li > a:hover {
+  border: 1px solid #fffbff;
+  outline: 1px solid #b5d3ff;
+  margin: 0;
+  background: -moz-linear-gradient(top, rgba(239,239,255,0.5) 0%, rgba(223,223,255,0.5) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,239,255,0.5)), color-stop(100%,rgba(223,223,255,0.5))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(239,239,255,0.5) 0%,rgba(223,223,255,0.5) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(239,239,255,0.5) 0%,rgba(223,223,255,0.5) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(239,239,255,0.5) 0%,rgba(223,223,255,0.5) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80efefff', endColorstr='#80dfdfff',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(239,239,255,0.5) 0%,rgba(223,223,255,0.5) 100%); /* W3C */
+  cursor: default;
+}
+
+.contextMenuPlugin > li.divider {
+  border-top: 1px solid #e7e3e7;
+  border-bottom: 1px solid #ffffff;
+  height: 0;
+  padding: 0;
+  margin: 5px 0 5px 27px;
+}
+
+.contextMenuPlugin > .header {
+  background: rgb(90,90,90); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(90,90,90,1) 0%, rgba(20,20,20,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(90,90,90,1)), color-stop(100%,rgba(20,20,20,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(90,90,90,1) 0%,rgba(20,20,20,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(90,90,90,1) 0%,rgba(20,20,20,1) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(90,90,90,1) 0%,rgba(20,20,20,1) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5a5a5a', endColorstr='#141414',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(90,90,90,1) 0%,rgba(20,20,20,1) 100%); /* W3C */
+  position: relative;
+  cursor: default;
+  padding: 3px 3px 3px 3px;
+  color: #ffffff;
+}
+
+.contextMenuPlugin > .gutterLine {
+  position: absolute;
+  border-left: 1px solid #e7e3e7;
+  border-right: 1px solid #ffffff;
+  width: 0;
+  top: 0;
+  bottom: 0;
+  left: 26px;
+  z-index: 0;
+}
+
+.sb-overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 49;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.sb-taskbox {
+    z-index: 50;
+    background-color: white;
+    position: fixed;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 10%;
+    text-align: center;
+}
+
+.sb-taskbox textarea {
+    width: 90%;
+    height: 70%;
+    margin: 10px auto;
+    display: block;
+    text-align: left;
+}
+
+.auto-reload .sb-loading-mask {
+    background-color: white;
+    position:fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    z-index: 9000;
+}
+
+.wiki-content tr:nth-child(2n+1) {
+    background-color: #f6f7f8;
+}
+
+
+.wiki-content th {
+    background-color: #e6e6e6;
+    position: static !important;
+    border: 1px solid #BBBBBB !important;
+}
+
+.wiki-content img {
+    max-width: 100%;
+}
+
+#rb #backlogs_container .stories .story .id {
+    width: 3em;
+}
+
+.svn-password-getter {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 0px;
+	width: 0px;
+	z-index: 9000;
+}
+
+#main-menu a .password-gen {
+	color: #fff !important;
+        background-color: #E20074 !important;
+	display: inline-block;
+	margin: 0 10px;
+	padding: 0 5px;
+	font-size: 11px;
+	border-radius: 5px;
+        line-height: 17px;
+        height: 17px;
+	vertical-align: middle;
+	position: absolute;
+	top: 3px;
+	right: 0;
+	text-align: center;
+	width: 65px;
+
+}
+#main-menu a.selected .password-gen,
+#main-menu a:hover .password-gen {
+	background-color: #fff !important;
+        color: #E20074 !important;
+}
+#main-menu a .password-gen:hover {
+	background-color: #FFCCFF !important;
+        color: #E20074 !important;
+
+}

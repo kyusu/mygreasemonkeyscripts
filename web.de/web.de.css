@@ -1,0 +1,22 @@
+.news {
+    display: none !important;
+}
+#footer {
+    display: none !important;
+}
+#promoline {
+    display: none !important;
+}
+
+#header {
+    display: none !important;
+}
+
+#loginsearch {
+    display: block !important;
+    margin-top: 0px;
+}
+h\:section {
+    display: none !important
+}
+
