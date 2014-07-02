@@ -290,6 +290,18 @@
                 }
             });
 
+            modules.push({
+                id: 'hidden-closed-tasks',
+                filter: 'issues',
+                menuItem: 'Hide closed tasks',
+                onActivate: function () {
+                    $('.issue.closed').parents('tr.issue').hide();
+                },
+                onDeactivate: function () {
+                    $('.issue.closed').parents('tr.issue').show();
+                }
+            });
+
             // Sliding header by Thomas Rosenau
             modules.push({
                 id: 'clone-header',
