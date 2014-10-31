@@ -364,7 +364,7 @@
                 id: 'task-contextmenu',
                 menuItem: 'Context menu for task',
                 onActivate: function () {
-                    jQuery('.task').contextPopup({
+                    jQuery('.task').unbind('mouseup').contextPopup({
                         items: [
                             {
                                 label: 'Assign to me',
