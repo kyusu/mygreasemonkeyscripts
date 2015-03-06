@@ -112,7 +112,7 @@
                 }
             });
 
-            // Hide closed stories
+            // Hide implemented stories
             modules.push({
                 id: 'hide-implemented-stories',
                 filter: 'taskboard',
@@ -135,6 +135,33 @@
                     $('body').removeClass(this.id);
                     $('tr.implemented').each(function () {
                         $(this).removeClass('implemented');
+                    });
+                }
+            });
+
+            // Hide resolved stories
+            modules.push({
+                id: 'hide-resolved-stories',
+                filter: 'taskboard',
+                menuItem: 'Hide resolved stories',
+                onActivate: function () {
+                    $('body').addClass(this.id);
+                    jQuery('.status:contains(Resolved)').parents('tr').each(function () {
+                        var story = $(this);
+                        var activeTasks = 0;
+                        activeTasks += story.find('[id$="_14"]').children().length;
+                        activeTasks += story.find('[id$="_2"]').children().length;
+                        activeTasks += story.find('[id$="_13"]').children().length;
+                        activeTasks += story.find('[id$="_3"]').children().length;
+                        if (!activeTasks) {
+                            story.addClass('resolved');
+                        }
+                    });
+                },
+                onDeactivate: function () {
+                    $('body').removeClass(this.id);
+                    $('tr.resolved').each(function () {
+                        $(this).removeClass('resolved');
                     });
                 }
             });

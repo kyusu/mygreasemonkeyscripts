@@ -38,6 +38,8 @@
 
 /* Hide implemented stories */
 .hide-implemented-stories #taskboard [class^=story_].implemented,
+/* Hide resolved stories */
+.hide-resolved-stories #taskboard [class^=story_].resolved,
 /* Hide closed tories */
 .hide-closed-stories #taskboard [class^=story_].closed,
 /* Hide closed tasks */

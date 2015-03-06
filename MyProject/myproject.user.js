@@ -9,8 +9,8 @@
 // The script should only execute in the top frame, not in iFrames.
 if (top.location.href === window.location.href) {
     (function () {
-        var scriptURI = 'https://raw.githubusercontent.com/kyusu/mygreasemonkeyscripts/master/MyProject/myproject.js',
-            cssURI = 'https://raw.githubusercontent.com/kyusu/mygreasemonkeyscripts/master/MyProject/myproject.css',
+        var scriptURI = 'https://myproject.telekom.de/pi/attachments/{hash}/download/myproject.js',
+            cssURI = 'https://myproject.telekom.de/pi/attachments/{hash}/download/myproject.css',
             script = document.createElement('script'),
             link = document.createElement('link');
 
