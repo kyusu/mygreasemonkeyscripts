@@ -38,6 +38,8 @@
 
 /* Hide implemented stories */
 .hide-implemented-stories #taskboard [class^=story_].implemented,
+/* Hide resolved stories */
+.hide-resolved-stories #taskboard [class^=story_].resolved,
 /* Hide closed tories */
 .hide-closed-stories #taskboard [class^=story_].closed,
 /* Hide closed tasks */
@@ -120,39 +122,78 @@
 }
 
 /* Readable issues */
-.readable-issues #taskboard .issue,
+.readable-issues #taskboard .task,
 .readable-issues #taskboard .story {
   color: black !important;
   outline: 1px solid rgba(0, 0, 0, .3)  !important;
 }
-.readable-issues #taskboard .issue .id,
+.readable-issues #taskboard .task .id,
 .readable-issues #taskboard .story .story-bar {
 	opacity: 1 !important;
     background: rgba(255, 255, 255, .8) !important;
 }
-.readable-issues #taskboard .issue .id a,
+.readable-issues #taskboard .task .id a,
 .readable-issues #taskboard .story .story-bar a {
     color: black !important;
 }
 .readable-issues #taskboard .story .story-bar .status {
-    margin: 2px 0 -2px 2px;
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-.readable-issues #taskboard .issue div.subject,
+.readable-issues #taskboard .task div.subject,
 .readable-issues #taskboard .story div.subject {
-    background: rgba(255, 255, 255, .99) !important;
+    background-color: rgba(255, 255, 255, .99) !important;
+    color: black;
+    font-family: "Arial", "Helvetica", sans-serif;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.readable-issues #taskboard .issue div.assigned_to_id,
-.readable-issues #taskboard .story div.assigned_to_id {
+.readable-issues #taskboard .task[style] div.subject,
+.readable-issues #taskboard .story div.subject {
+    height: 39px;
+}
+.readable-issues #taskboard .task div.assigned_to_id,
+.readable-issues #taskboard .story .story-footer {
     margin-top: 0px;
     background: rgba(255, 255, 255, .8) !important;
+    font-size: 10px;
 }
 
-.readable-issues #taskboard .issue div.assigned_to_id .t,
+.readable-issues #taskboard .story .story-footer div.assigned_to_id,
+.readable-issues #taskboard .story .story-footer div.story-points {
+    font-size: 10px;
+    margin: 0px;
+    width: auto;
+}
+
+.readable-issues #taskboard .story .story-footer div.story-points {
+    padding-right: 5px;
+}
+
+.readable-issues #taskboard .story .story-footer:before,
+.readable-issues #taskboard .story .story-footer:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.readable-issues #taskboard .story .story-footer:after {
+    clear: both;
+}
+
+.readable-issues #taskboard .task div.assigned_to_id {
+    width: 81px;
+}
+
+.readable-issues #taskboard .task div.assigned_to_id .t,
 .readable-issues #taskboard .story div.assigned_to_id .t {
     white-space: pre;
     overflow: hidden;
     text-overflow: ellipsis;
     letter-spacing: 1px;
+    color: black !important;
 }
 
 /* Clone header */
