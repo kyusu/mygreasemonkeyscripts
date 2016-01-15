@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           The Midgard "Copy issue id to clipboard" button
+// @name           The Midgard "Copy id & summary to clipboard" button
 // @namespace      https://github.com/kyusu/mygreasemonkeyscripts
 // @description    Copies the issue id of the currently open issue to the clipboard
 // @include        https://midgard.intra.t-online.de/gard/browse/*
@@ -10,19 +10,37 @@
 // ==/UserScript==
 
 (function () {
-    var li = document.createElement('li');
-    var anchor = document.createElement('a');
-    anchor.href = '#';
-    anchor.innerText = 'Copy issue id';
-    anchor.className = 'aui-button';
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        var paths = window.location.pathname.split('/');
-        GM_setClipboard(paths[paths.length - 1]);
-    });
-    li.appendChild(anchor);
     var header = document.querySelector('nav.aui-header ul.aui-nav');
-    header.appendChild(li);
+    var anchorFactory = function (label, clickCallback) {
+        var anchor = document.createElement('a');
+        anchor.href = '#';
+        anchor.innerText = label;
+        anchor.className = 'aui-button';
+        anchor.addEventListener('click', clickCallback);
+        return anchor;
+
+    };
+    var addAnchor = function (anchor) {
+        var li = document.createElement('li');
+        li.appendChild(anchor);
+        header.appendChild(li);
+    };
+    var getId = function () {
+        var paths = window.location.pathname.split('/');
+        return paths[paths.length - 1];
+    };
+    var copyIdAnchor = anchorFactory('Copy id', function (e) {
+        e.preventDefault();
+        GM_setClipboard(getId());
+    });
+    var copySummaryAnchor = anchorFactory('Copy summary', function (e) {
+        e.preventDefault();
+        var header = document.getElementById('summary-val').innerText;
+        var summary = getId() + ' ' + header;
+        GM_setClipboard(summary);
+    });
+    addAnchor(copyIdAnchor);
+    addAnchor(copySummaryAnchor);
 })();
 
 
