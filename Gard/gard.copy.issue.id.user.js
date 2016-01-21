@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name           The Midgard "Copy id & summary to clipboard" button
+// @name           The Gard "Copy id & summary to clipboard" button
 // @namespace      https://github.com/kyusu/mygreasemonkeyscripts
 // @description    Copies the issue id of the currently open issue to the clipboard
-// @include        https://midgard.intra.t-online.de/gard/browse/*
+// @include        https://gard.telekom.de/gard/browse/*
 // @version        1
 // @noframes
 // @grant          GM_setClipboard

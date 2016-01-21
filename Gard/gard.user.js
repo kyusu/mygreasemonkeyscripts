@@ -1,9 +1,8 @@
 // ==UserScript==
-// @name           The Midgard automatic reloader
+// @name           The Gard automatic reloader
 // @namespace      https://github.com/kyusu/mygreasemonkeyscripts
 // @description    Adds missing features and remedies annoyances
-// @include        https://midgard.intra.t-online.de/gard/secure/Dashboard.jspa
-// @match          https://midgard.intra.t-online.de/gard/secure/Dashboard.jspa
+// @include        https://gard.telekom.de/gard/secure/Dashboard.jspa*
 // ==/UserScript==
 
 (function () {
