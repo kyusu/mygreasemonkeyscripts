@@ -5,17 +5,21 @@
 // @include        https://myproject.telekom.de/*
 // @version        1
 // @noframes
+// @grant          GM_getValue
+// @grant          GM_setValue
 // @run-at         document-idle
 // ==/UserScript==
 
 (function () {
-    var pollerId;
+    var pollForToolBarId;
+    var keepAlivePollId;
     var toolBarItems;
     var rightPanelHidden = false;
     var editableDescriptionHidden = false;
     var domId = 'user-script-non-editable-description';
     var magenta = '#e20074';
-    var originalColor = 'rgb(248, 248, 248)';
+    var originalColor = '#f8f8f8';
+    var keepAliveInterval = 300000;
 
     var buttonFactory = function (label, clickCallback) {
         var button = document.createElement('button');
@@ -76,10 +80,50 @@
         var toolBar = document.querySelector('#toolbar');
         if (toolBar) {
             toolBarItems = document.querySelector('#toolbar-items');
-            clearInterval(pollerId);
+            clearInterval(pollForToolBarId);
             addButton(hideRightPanelButton);
             addButton(addNonEditableDescriptionButton);
         }
     };
-    pollerId = setInterval(checkToolBarPresence, 300);
+    pollForToolBarId = setInterval(checkToolBarPresence, 300);
+
+    var startKeepAlive = function () {
+        var xhReq = new XMLHttpRequest();
+        keepAlivePollId = setInterval(function () {
+            xhReq.open('GET', 'https://myproject.telekom.de/pi/', true);
+            xhReq.send(null);
+        }, keepAliveInterval);
+    };
+
+    var handleKeepAliveChange = function (e) {
+        if (e.target.checked) {
+            GM_setValue('keep_alive', true);
+            startKeepAlive();
+        } else {
+            GM_setValue('keep_alive', false);
+            clearInterval(keepAlivePollId);
+        }
+    };
+
+    var addKeepAliveCheckBox = function () {
+        var keepAliveOn = !!GM_getValue('keep_alive');
+        var accountNavLeft = document.querySelector('#account-nav-left');
+        var li = document.createElement('li');
+        var label = document.createElement('label');
+        var input = document.createElement('input');
+        var span = document.createElement('span');
+        span.textContent = 'KP';
+        input.type = 'checkbox';
+        input.checked =  keepAliveOn;
+        input.addEventListener('click', handleKeepAliveChange);
+        label.appendChild(input);
+        label.appendChild(span);
+        li.appendChild(label);
+        accountNavLeft.appendChild(li);
+        if (keepAliveOn) {
+            startKeepAlive();
+        }
+    };
+
+    addKeepAliveCheckBox();
 })();
