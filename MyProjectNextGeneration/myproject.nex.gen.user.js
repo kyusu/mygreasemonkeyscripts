@@ -5,11 +5,12 @@
 // @include        https://myproject.telekom.de/*
 // @version        1
 // @noframes
-// @run-at         document-end
+// @run-at         document-idle
 // ==/UserScript==
 
 (function () {
-    var toolBar = document.querySelector('#toolbar-items');
+    var pollerId;
+    var toolBarItems;
     var rightPanelHidden = false;
 
     var buttonFactory = function (label, clickCallback) {
@@ -24,7 +25,7 @@
         var li = document.createElement('li');
         li.className = 'toolbar-item';
         li.appendChild(anchor);
-        toolBar.appendChild(li);
+        toolBarItems.appendChild(li);
     };
 
     var hideRightPanelButton = buttonFactory('💩', function (e) {
@@ -36,5 +37,13 @@
         rightPanelHidden = !rightPanelHidden;
     });
 
-    addButton(hideRightPanelButton);
+    var checkToolBarPresence = function () {
+        var toolBar = document.querySelector('#toolbar');
+        if (toolBar) {
+            toolBarItems = document.querySelector('#toolbar-items');
+            clearInterval(pollerId);
+            addButton(hideRightPanelButton);
+        }
+    };
+    pollerId = setInterval(checkToolBarPresence, 300);
 })();
