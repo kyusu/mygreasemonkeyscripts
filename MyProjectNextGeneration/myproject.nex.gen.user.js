@@ -14,25 +14,23 @@
     var pollForToolBarId;
     var keepAlivePollId;
     var toolBarItems;
-    var rightPanelHidden = false;
-    var editableDescriptionHidden = false;
     var domId = 'user-script-non-editable-description';
-    var magenta = '#e20074';
-    var originalColor = '#f8f8f8';
     var keepAliveInterval = 300000;
+    var nonEditableKey = 'non_editable';
+    var rightPanelKey = 'right_panel';
 
-    var buttonFactory = function (label, clickCallback) {
-        var button = document.createElement('button');
-        button.innerText = label;
-        button.className = 'button';
-        button.addEventListener('click', clickCallback);
-        return button;
+    var checkBoxFactory = function (state, changeCallBack) {
+        var checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+        checkBox.checked = state;
+        checkBox.addEventListener('change', changeCallBack);
+        return checkBox;
     };
 
-    var addButton = function (anchor) {
+    var addCheckBox = function (checkBox) {
         var li = document.createElement('li');
         li.className = 'toolbar-item';
-        li.appendChild(anchor);
+        li.appendChild(checkBox);
         toolBarItems.appendChild(li);
     };
 
@@ -55,25 +53,25 @@
         workPackageDescription.removeChild(nonEditableDescription)
     };
 
-    var addNonEditableDescriptionButton = buttonFactory('X', function (e) {
-        e.preventDefault();
-        e.target.style.backgroundColor = editableDescriptionHidden ? originalColor : magenta;
-        if (editableDescriptionHidden) {
-            hideNonEditableDescription();
-        } else {
+    var addNonEditableDescriptionButton = checkBoxFactory(GM_getValue(nonEditableKey), function (e) {
+        GM_setValue(nonEditableKey, e.target.checked);
+        if (e.target.checked) {
             showNonEditableDescription();
+        } else {
+            hideNonEditableDescription();
         }
-        editableDescriptionHidden = !editableDescriptionHidden;
     });
 
-    var hideRightPanelButton = buttonFactory('->', function (e) {
-        e.preventDefault();
-        e.target.style.backgroundColor = rightPanelHidden ? originalColor : magenta;
+    var toggleRightPanel = function (hide) {
         var rightPanel = document.querySelector('#work-packages-index .work-packages--split-view .work-packages--right-panel');
-        rightPanel.style.display = rightPanelHidden ? 'block' : 'none';
+        rightPanel.style.display = hide ? 'none' : 'block';
         var leftPanel = document.querySelector('#work-packages-index .work-packages--split-view .work-packages--left-panel');
-        leftPanel.style.width = rightPanelHidden ? 'calc(60% + 0.375rem)' : '100%';
-        rightPanelHidden = !rightPanelHidden;
+        leftPanel.style.width = hide ? '100%' : 'calc(60% + 0.375rem)';
+    };
+
+    var hideRightPanelButton = checkBoxFactory(GM_getValue(rightPanelKey), function (e) {
+        GM_setValue(rightPanelKey, e.target.checked);
+        toggleRightPanel(e.target.checked);
     });
 
     var checkToolBarPresence = function () {
@@ -81,8 +79,15 @@
         if (toolBar) {
             toolBarItems = document.querySelector('#toolbar-items');
             clearInterval(pollForToolBarId);
-            addButton(hideRightPanelButton);
-            addButton(addNonEditableDescriptionButton);
+            addCheckBox(hideRightPanelButton);
+            addCheckBox(addNonEditableDescriptionButton);
+            if (GM_getValue(nonEditableKey)) {
+                showNonEditableDescription();
+            }
+            var hideRightPanel = GM_getValue(rightPanelKey);
+            if (hideRightPanel) {
+                toggleRightPanel(hideRightPanel);
+            }
         }
     };
     pollForToolBarId = setInterval(checkToolBarPresence, 300);
@@ -109,16 +114,11 @@
         var keepAliveOn = !!GM_getValue('keep_alive');
         var accountNavLeft = document.querySelector('#account-nav-left');
         var li = document.createElement('li');
-        var label = document.createElement('label');
         var input = document.createElement('input');
-        var span = document.createElement('span');
-        span.textContent = 'KP';
         input.type = 'checkbox';
-        input.checked =  keepAliveOn;
+        input.checked = keepAliveOn;
         input.addEventListener('click', handleKeepAliveChange);
-        label.appendChild(input);
-        label.appendChild(span);
-        li.appendChild(label);
+        li.appendChild(input);
         accountNavLeft.appendChild(li);
         if (keepAliveOn) {
             startKeepAlive();
