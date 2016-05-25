@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           The Gard "Copy id & summary to clipboard" button
+// @name           The Gard "Copy id, summary & branch name to clipboard" button
 // @namespace      https://github.com/kyusu/mygreasemonkeyscripts
 // @description    Copies the issue id of the currently open issue to the clipboard
 // @include        https://gard.telekom.de/gard/browse/*
@@ -29,18 +29,32 @@
         var paths = window.location.pathname.split('/');
         return paths[paths.length - 1];
     };
-    var copyIdAnchor = anchorFactory('Copy id', function (e) {
+    var getHeader = function () {
+        return document.getElementById('summary-val').innerText;
+    };
+    var handleClick = function (getClipboardData, e) {
         e.preventDefault();
-        GM_setClipboard(getId());
-    });
-    var copySummaryAnchor = anchorFactory('Copy summary', function (e) {
-        e.preventDefault();
-        var header = document.getElementById('summary-val').innerText;
-        var summary = getId() + ' ' + header;
-        GM_setClipboard(summary);
-    });
+        GM_setClipboard(getClipboardData());
+    };
+    var getSummary = function () {
+        return getId() + ' ' + getHeader();
+    };
+    var replaceWhitespace = function (value) {
+        return value.replace(/\s/g, '-');
+    };
+    var compose = function (f, g) {
+        return function (x) {
+            return f(g(x));
+        }
+    };
+
+    var copyIdAnchor = anchorFactory('Copy id', handleClick.bind(null, getId));
+    var copySummaryAnchor = anchorFactory('Copy summary', handleClick.bind(null, getSummary));
+    var copyBranchNameAnchor = anchorFactory('Copy branch name', handleClick.bind(null, compose(replaceWhitespace, getSummary)));
+
     addAnchor(copyIdAnchor);
     addAnchor(copySummaryAnchor);
+    addAnchor(copyBranchNameAnchor);
 })();
 
 
