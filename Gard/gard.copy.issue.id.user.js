@@ -39,8 +39,8 @@
     var getSummary = function () {
         return getId() + ' ' + getHeader();
     };
-    var replaceWhitespace = function (value) {
-        return value.replace(/\s/g, '-');
+    var replaceInvalidCharacters = function (value) {
+        return value.replace(/[^(a-z)(A-Z)(0-9)(-)]/g, '-');
     };
     var compose = function (f, g) {
         return function (x) {
@@ -50,7 +50,7 @@
 
     var copyIdAnchor = anchorFactory('Copy id', handleClick.bind(null, getId));
     var copySummaryAnchor = anchorFactory('Copy summary', handleClick.bind(null, getSummary));
-    var copyBranchNameAnchor = anchorFactory('Copy branch name', handleClick.bind(null, compose(replaceWhitespace, getSummary)));
+    var copyBranchNameAnchor = anchorFactory('Copy branch name', handleClick.bind(null, compose(replaceInvalidCharacters, getSummary)));
 
     addAnchor(copyIdAnchor);
     addAnchor(copySummaryAnchor);
