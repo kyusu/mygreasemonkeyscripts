@@ -1,0 +1,72 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("gard.telekom.de") {
+    .ghx-issue.review-small {
+        background-color: lightcoral;
+    }
+    .ghx-issue.review-small .ghx-issue-content,
+    li[data-column-id="5648"] .ghx-issue.ghx-done .ghx-issue-content,
+    li[data-column-id="2403"] .ghx-issue.ghx-done .ghx-issue-content {
+        min-height: 10px !important;
+        padding: 0px 0px 0px 10px !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        height: 18px !important;
+    }
+    .ghx-issue.review-small .ghx-key,
+    li[data-column-id="5648"] .ghx-done.ghx-issue .ghx-key,
+    li[data-column-id="2403"] .ghx-done.ghx-issue .ghx-key {
+        display: none !important;
+    }
+    .ghx-issue.review-small .ghx-avatar,
+    li[data-column-id="5648"] .ghx-issue.ghx-done .ghx-avatar,
+    li[data-column-id="2403"] .ghx-issue.ghx-done .ghx-avatar {
+        display: none !important;
+    }
+    .ghx-issue.review-small .ghx-end,
+    li[data-column-id="5648"] .ghx-done.ghx-issue .ghx-end,
+    li[data-column-id="2403"] .ghx-done.ghx-issue .ghx-end {
+        display: none !important;
+    }
+    .ghx-issue.review-small .ghx-flags,
+    li[data-column-id="5648"] .ghx-done.ghx-issue .ghx-flags,
+    li[data-column-id="2403"] .ghx-done.ghx-issue .ghx-flags {
+        display: none !important;
+    }
+    .ghx-issue.review-small .ghx-type,
+    li[data-column-id="5648"] .ghx-issue.ghx-done .ghx-type,
+    li[data-column-id="2403"] .ghx-issue.ghx-done .ghx-type {
+        display: none;
+    }
+    .ghx-issue.review-small:hover .ghx-key,
+    li[data-column-id="5648"] .ghx-issue.ghx-done:hover .ghx-key,
+    li[data-column-id="2403"] .ghx-issue.ghx-done:hover .ghx-key {
+        display: inline !important;
+        color: #e20074;
+    }
+    .ghx-issue.review-small:hover .ghx-summary,
+    li[data-column-id="5648"] .ghx-issue.ghx-done:hover .ghx-summary,
+    li[data-column-id="2403"] .ghx-issue.ghx-done:hover .ghx-summary {
+        display: none !important;
+    }
+
+    .aui-badge[title="Unestimated"] {
+        display: none !important;
+    }
+
+    li:not(:last-of-type) .ghx-issue-content {
+        padding-bottom: 0 !important;
+        min-height: 0px;
+    }
+    .ghx-issue-fields .ghx-summary .ghx-inner {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    body#jira.ghx-scroll-columns.ghx-agile {
+        overflow-x: visible !important;
+    }
+    #announcement-banner > div {
+        background-color: transparent !important;
+    }
+}
