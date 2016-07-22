@@ -16,11 +16,5 @@
     const getImages = selector => Array.from(document.querySelectorAll(selector));
     const getIssues = images => images.map(getIssue);
     const markIssues = issues => issues.forEach(addClass.bind(null, 'review-small'));
-    const issuesPresent = () => !!document.querySelector('.ghx-issue');
-    const intervalId = setInterval(() => {
-        if (issuesPresent()) {
-            clearInterval(intervalId);
-            markIssues(getIssues(getImages(getSelector(getUserName()))));
-        }
-    }, 1000);
+    AJS.$(GH).bind('workModeUIReady', () => markIssues(getIssues(getImages(getSelector(getUserName())))));
 })();
