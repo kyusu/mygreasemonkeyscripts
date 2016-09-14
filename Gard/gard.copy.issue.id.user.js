@@ -40,7 +40,7 @@
         return getId() + ' ' + getHeader();
     };
     var replaceInvalidCharacters = function (value) {
-        return value.replace(/[^(a-z)(A-Z)(0-9)(-)]/g, '-');
+        return value.replace(/[^a-z|A-Z|0-9|-]/g, '-');
     };
     var compose = function (f, g) {
         return function (x) {
