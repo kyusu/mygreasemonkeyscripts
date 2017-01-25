@@ -3,6 +3,7 @@
 // @namespace      https://github.com/kyusu/mygreasemonkeyscripts
 // @description    Copies the issue id of the currently open issue to the clipboard
 // @include        https://gard.telekom.de/gard/browse/*
+// @include        https://beg-dev.atlassian.net/browse/*
 // @version        1
 // @noframes
 // @grant          GM_setClipboard
