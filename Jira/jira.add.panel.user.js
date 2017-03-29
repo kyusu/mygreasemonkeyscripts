@@ -53,8 +53,7 @@
         var descriptionValueEl = document.querySelector('#description-val');
         var evt = new MouseEvent("click", {
             bubbles: true,
-            cancelable: true,
-            view: window
+            cancelable: true
         });
         descriptionValueEl.dispatchEvent(evt);
         getDescriptionTextArea().then(function (textArea) {
