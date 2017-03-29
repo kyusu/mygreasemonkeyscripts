@@ -10,49 +10,50 @@
 // ==/UserScript==
 
 (function () {
-	var header = document.querySelector('#header > nav > div > div.aui-header-primary > ul');
-	var anchorFactory = function (label, clickCallback) {
-		var anchor = document.createElement('a');
-		anchor.href = '#';
-		anchor.innerText = label;
-		anchor.className = 'aui-button aui-button-primary aui-style ';
-		anchor.addEventListener('click', clickCallback);
-		return anchor;
+    var header = document.querySelector('#header > nav > div > div.aui-header-primary > ul');
+    var anchorFactory = function (label, title, clickCallback) {
+        var anchor = document.createElement('a');
+        anchor.href = '#';
+        anchor.innerText = label;
+        anchor.title = title;
+        anchor.className = 'aui-button aui-button-primary aui-style ';
+        anchor.addEventListener('click', clickCallback);
+        return anchor;
 
-	};
-	var addAnchor = function (anchor) {
-		var li = document.createElement('li');
-		li.appendChild(anchor);
-		header.appendChild(li);
-	};
-	var getId = function () {
-		var paths = window.location.pathname.split('/');
-		return paths[paths.length - 1];
-	};
-	var getHeader = function () {
-		return document.getElementById('summary-val').innerText;
-	};
-	var handleClick = function (getClipboardData, e) {
-		e.preventDefault();
-		GM_setClipboard(getClipboardData());
-	};
-	var getSummary = function () {
-		return getId() + ' ' + getHeader();
-	};
-	var replaceInvalidCharacters = function (value) {
-		return value.replace(/[^a-z|A-Z|0-9|-]/g, '-');
-	};
-	var compose = function (f, g) {
-		return function (x) {
-			return f(g(x));
-		}
-	};
+    };
+    var addAnchor = function (anchor) {
+        var li = document.createElement('li');
+        li.appendChild(anchor);
+        header.appendChild(li);
+    };
+    var getId = function () {
+        var paths = window.location.pathname.split('/');
+        return paths[paths.length - 1];
+    };
+    var getHeader = function () {
+        return document.getElementById('summary-val').innerText;
+    };
+    var handleClick = function (getClipboardData, e) {
+        e.preventDefault();
+        GM_setClipboard(getClipboardData());
+    };
+    var getSummary = function () {
+        return getId() + ' ' + getHeader();
+    };
+    var replaceInvalidCharacters = function (value) {
+        return value.replace(/[^a-z|A-Z|0-9|-]/g, '-');
+    };
+    var compose = function (f, g) {
+        return function (x) {
+            return f(g(x));
+        }
+    };
 
-	var copyIdAnchor = anchorFactory('🆔', handleClick.bind(null, getId));
-	var copySummaryAnchor = anchorFactory('📜', handleClick.bind(null, getSummary));
-	var copyBranchNameAnchor = anchorFactory('⑂', handleClick.bind(null, compose(replaceInvalidCharacters, getSummary)));
+    var copyIdAnchor = anchorFactory('🆔', 'Copy ticket id into your clipboard', handleClick.bind(null, getId));
+    var copySummaryAnchor = anchorFactory('📜', 'Copy ticket summary into your clipboard', handleClick.bind(null, getSummary));
+    var copyBranchNameAnchor = anchorFactory('⑂', 'Copy ticket summary as vald Git branch name into your clipboard', handleClick.bind(null, compose(replaceInvalidCharacters, getSummary)));
 
-	addAnchor(copyIdAnchor);
-	addAnchor(copySummaryAnchor);
-	addAnchor(copyBranchNameAnchor);
+    addAnchor(copyIdAnchor);
+    addAnchor(copySummaryAnchor);
+    addAnchor(copyBranchNameAnchor);
 })();

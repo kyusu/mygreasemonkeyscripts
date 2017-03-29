@@ -14,9 +14,10 @@
     var counter;
 
     var header = document.querySelector('#header > nav > div > div.aui-header-primary > ul');
-    var anchorFactory = function (label, clickCallback) {
+    var anchorFactory = function (label, title, clickCallback) {
         var anchor = document.createElement('a');
         anchor.href = '#';
+        anchor.title = title;
         anchor.innerText = label;
         anchor.className = 'aui-button aui-button-primary aui-style ';
         anchor.addEventListener('click', clickCallback);
