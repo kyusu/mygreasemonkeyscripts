@@ -48,22 +48,11 @@
 		}
 	};
 
-	var copyIdAnchor = anchorFactory('Copy id', handleClick.bind(null, getId));
-	var copySummaryAnchor = anchorFactory('Copy summary', handleClick.bind(null, getSummary));
-	var copyBranchNameAnchor = anchorFactory('Copy branch name', handleClick.bind(null, compose(replaceInvalidCharacters, getSummary)));
+	var copyIdAnchor = anchorFactory('🆔', handleClick.bind(null, getId));
+	var copySummaryAnchor = anchorFactory('📜', handleClick.bind(null, getSummary));
+	var copyBranchNameAnchor = anchorFactory('⑂', handleClick.bind(null, compose(replaceInvalidCharacters, getSummary)));
 
 	addAnchor(copyIdAnchor);
 	addAnchor(copySummaryAnchor);
 	addAnchor(copyBranchNameAnchor);
 })();
-
-
-
-
-
-
-
-
-
-
-
