@@ -65,7 +65,7 @@
         });
     };
 
-    var addPanelAnchor = anchorFactory('📒', addPanel);
+    var addPanelAnchor = anchorFactory('📒', 'Add panel for the "Non-technical description" of the ticket', addPanel);
 
     addAnchor(addPanelAnchor);
 }());
