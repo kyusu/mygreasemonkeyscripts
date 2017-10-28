@@ -12,6 +12,7 @@
         const branchNameEl = branchNameEls[0];
         if (branchNameEl) {
             branchNameEl.style.cursor = 'pointer';
+            branchNameEl.style.color = '#3572b0';
             branchNameEl.addEventListener('click', ev => {
                 const branchName = ev.target.innerText;
                 GM_setClipboard(branchName);
