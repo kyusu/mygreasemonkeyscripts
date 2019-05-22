@@ -3,6 +3,7 @@
 // @namespace      https://github.com/kyusu/mygreasemonkeyscripts
 // @description    Copies the issue id, issue title or a combination of both of the currently open issue to the clipboard
 // @include        https://*.atlassian.net/browse/*
+// @include        https://jira.br3uninger.de/browse/ENTD-*
 // @version        1
 // @noframes
 // @grant          GM_setClipboard
