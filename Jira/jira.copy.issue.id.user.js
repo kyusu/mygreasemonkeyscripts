@@ -8,10 +8,13 @@
 // @noframes
 // @grant          GM_setClipboard
 // @run-at         document-end
+// @require        https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js
 // ==/UserScript==
 
 (function () {
+  
     var header = document.querySelector('#header > nav > div > div.aui-header-primary > ul');
+
     var anchorFactory = function (label, title, clickCallback) {
         var anchor = document.createElement('a');
         anchor.href = '#';
@@ -39,20 +42,15 @@
         GM_setClipboard(getClipboardData());
     };
     var getSummary = function () {
-        return getId() + ' ' + getHeader();
+        return `${getId()}-${replaceInvalidCharacters(getHeader())}`;
     };
     var replaceInvalidCharacters = function (value) {
-        return value.replace(/[^a-z|A-Z|0-9|-]/g, '-');
-    };
-    var compose = function (f, g) {
-        return function (x) {
-            return f(g(x));
-        }
+        return _.kebabCase(value.replace(/\[Story|BUG|AUFGABE\]/g,''))
     };
 
     var copyIdAnchor = anchorFactory('🆔', 'Copy ticket id into your clipboard', handleClick.bind(null, getId));
     var copySummaryAnchor = anchorFactory('📜', 'Copy ticket summary into your clipboard', handleClick.bind(null, getSummary));
-    var copyBranchNameAnchor = anchorFactory('⑂', 'Copy ticket summary as vald Git branch name into your clipboard', handleClick.bind(null, compose(replaceInvalidCharacters, getSummary)));
+    var copyBranchNameAnchor = anchorFactory('⑂', 'Copy ticket summary as valid Git branch name into your clipboard', handleClick.bind(null, getSummary));
 
     addAnchor(copyIdAnchor);
     addAnchor(copySummaryAnchor);
