@@ -46,7 +46,7 @@
         return `${getId()}-${replaceInvalidCharacters(getHeader())}`;
     };
     var replaceInvalidCharacters = function (value) {
-        return _.kebabCase(value.replace(/\[Story|BUG|AUFGABE\]/g,''))
+        return _.kebabCase(value.replace(/\[Story|BUG|ESTIMATION|AUFGABE\]/g,''))
     };
 
     var copyIdAnchor = anchorFactory('🆔', 'Copy ticket id into your clipboard', handleClick.bind(null, getId));
